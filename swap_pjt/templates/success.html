@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <style>
+     
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+       
+        .popup-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+            transform: scale(0);
+            animation: popupAnimation 0.4s ease-out forwards;
+        }
+
+       
+        @keyframes popupAnimation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #28a745;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        h1 {
+            color: #28a745;
+            font-size: 32px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+      
+        .btn {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            animation: wooshAnimation 0.8s ease-out;
+            position: relative;
+        }
+
+      
+        .btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+   
+        .btn:active {
+            transform: scale(0.98);
+            background-color: #1e7e34; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes wooshAnimation {
+            0% {
+                transform: scale(0) translateY(-50px);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1) translateY(10px);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+       
+        @keyframes carDrive {
+            0% {
+                transform: translateX(5);
+                opacity: 50;
+            }
+            100% {
+                transform: translateX(100vw);
+                opacity: 50;
+            }
+        }
+
+    
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .footer a {
+            color: #28a745;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+            color: #218838;
+        }
+
+     
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 5;
+        }
+
+       
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="overlay"></div>
+
+  
+    <div class="popup-container">
+    
+        <div class="success-icon">
+            &#10004;
+        </div>
+
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase. Your transaction was successful, and we have received your payment.</p>
+
+        <p><strong>Transaction ID:</strong> #1234567890</p>
+        <p><strong>Amount Paid:</strong> $299.99</p>
+
+     
+        <a href="{% url 'brand_list' %}" class="btn" id="goHomeBtn">Go to Homepage</a>
+
+     
+        <div class="footer">
+            <p>Need help? <a href="mailto:support@example.com">Contact support</a></p>
+        </div>
+    </div>
+
+    <script>
+     
+        document.getElementById('goHomeBtn').addEventListener('click', function(e) {
+            e.preventDefault(); 
+            var btn = this;
+
+           
+            btn.style.animation = 'carDrive 2s forwards'; 
+
+       
+            setTimeout(function() {
+                window.location.href = btn.getAttribute('href');
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>

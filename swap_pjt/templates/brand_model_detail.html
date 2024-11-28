@@ -1,0 +1,174 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand.name }} Models</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .brand-detail {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+      
+        .brand-models {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .brand-model-card {
+            width: 330px; 
+            height: auto;  
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-model-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .brand-model-image {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .brand-model-info {
+            padding: 15px;
+        }
+
+        .brand-model-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .brand-model-info p {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: #333;
+        }
+        .model-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-book-now {
+            background-color: #ff5100;
+        }
+
+        .btn-book-now:hover {
+            background-color: #666;
+            color: #fff;  
+        }
+
+        .btn-view-details {
+            background-color: #666;
+        }
+
+        .btn-view-details:hover {
+            background-color: #ff5100;
+            color: #fff; 
+        }
+        .model-details {
+            display: none; 
+            text-align: left;
+            color: #000000;
+            margin-top: 10px;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+        }
+
+        .model-details.show {
+            display: block; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="brand-detail">
+        <h1>{{ brand.name }} - Brand Models</h1>
+
+        <div class="brand-models">
+            {% for model in brand_models %}
+                <div class="brand-model-card">
+                    <img src="{{ model.image.url }}" alt="{{ model.name }}" class="brand-model-image">
+                    <div class="brand-model-info">
+                        <h3>{{ model.name }} ({{ model.year |floatformat:0 }})</h3>
+                        <p><strong>Price:</strong> Rs.{{ model.actual_price|floatformat:0}}</p>
+                        <p><strong>Booking Price:</strong> Rs.{{ model.booking_price |floatformat:0 }}</p>
+
+                        <div class="model-actions">
+                            <button class="btn btn-view-details" onclick="toggleDetails('{{ model.id }}')">View Details</button>
+                            <form action="{% url 'checkout' %}" method="POST">
+                                {% csrf_token %}
+                            <button type="submit" class="btn btn-book-now">Book Now</button>
+                            </form>
+                        </div>
+                        <div id="details-{{ model.id }}" class="model-details">
+                            <h4>Model Details</h4>
+                            <p><strong>Engine:</strong> {{ model.engine }}</p>
+                            <p><strong>Kilometer:</strong> {{ model.kilometer }} km</p>
+                            <p><strong>Location:</strong> {{ model.location }}</p>
+                            <p>{{ model.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No models available for this brand.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+      function toggleDetails(modelId) {
+            var detailsElement = document.getElementById('details-' + modelId);
+            if (detailsElement.classList.contains('show')) {
+                detailsElement.classList.remove('show');
+            } else {
+                detailsElement.classList.add('show');
+            }
+        }
+    </script>
+{% include 'footer.html' %}
+</body>
+</html>
+{% endblock content %}

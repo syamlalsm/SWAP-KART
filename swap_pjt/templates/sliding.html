@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+       
+        .content-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .scrolling-logo-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin-top: 20px;
+            padding: 20px 0;
+        }
+
+        .scrolling-logo {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scroll-logo 25s linear infinite;
+        }
+
+       
+        @keyframes scroll-logo {
+            0% {
+                transform: translateX(100%); 
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .scrolling-logo img {
+            height: 200px;  
+            width: 200px;  
+            border-radius: 50%;  
+            margin-right: 50px;  
+        }
+    </style>
+</head>
+<body>
+
+    <div class="content-container">
+        <h5><b><u>Our upcoming Brands...! </u></b></h5>
+    </div>
+
+   
+    <div class="scrolling-logo-container">
+        <div class="scrolling-logo">
+           
+            <img src="{% static 'bently.jpeg' %}" alt="Logo">
+            <img src="{% static 'benz.jpeg' %}" alt="Logo">
+            <img src="{% static 'ford.jpeg' %}" alt="Logo">
+            <img src="{% static 'mg.png' %}" alt="Logo">
+            <img src="{% static 'porche.jpeg' %}" alt="Logo">
+          
+        </div>
+    </div>
+
+</body>
+</html>

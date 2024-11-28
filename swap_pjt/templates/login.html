@@ -1,0 +1,119 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+
+<div class="login-container">
+    <h2 class="form-heading">Login</h2>
+    
+    <form method="POST" class="login-form">
+        {% csrf_token %}
+        
+     
+        <label for="username" class="input-label">Username</label>
+        <input type="text" name="username" id="username" class="input-field">
+        
+        <label for="password" class="input-label">Password</label>
+        <input type="password" name="password" id="password" class="input-field">
+        
+       
+        <input type="submit" value="Login" class="submit-button">
+    </form>
+
+    <div class="form-footer">
+        <p>Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+    </div>
+</div>
+
+
+
+
+<style>
+  
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f4;
+    }
+
+  
+    .login-container {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+       
+    }
+
+ 
+    .form-heading {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+  
+    .input-label {
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+    }
+
+
+    .input-field {
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+   
+    .submit-button {
+        padding: 10px;
+        font-size: 14px;
+        background-color: #666;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+
+    .submit-button:hover {
+        background-color: #ff5100;
+    }
+
+    .form-footer {
+        margin-top: 15px;
+        text-align: center;
+    }
+
+    .form-footer a {
+        color: #ff5100;
+        text-decoration: none;
+    }
+
+    .form-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+{% include 'footer.html' %}
+
+{% endblock content %}

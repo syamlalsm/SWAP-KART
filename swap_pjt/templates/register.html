@@ -1,0 +1,148 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <style>
+      
+        .registration-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); 
+            width: 100%;
+            max-width: 500px; 
+            height: auto; 
+            min-height: 100px;
+            text-align: center;
+            margin-top: 3%;
+            margin-left: 30%;
+            margin-bottom: 3%;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+            color: #666;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1.3px solid #d3d2d2;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #e7f2f9;
+        }
+
+      
+        input[type="submit"] {
+            background-color: #666; 
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ff5100; 
+        }
+
+     
+        .form-footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #ff5100; 
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            min-height: 100vh; 
+            display: flex;
+            flex-direction: column; 
+        }
+
+      
+        .footer-wrapper {
+            margin-top: auto; 
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="registration-container">
+        <h2>Create Your Swapping Account</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+          =
+            <label for="username">Username</label>
+            {{ form.username }}
+            {% if form.errors.username %}
+            <label class="text-danger">{{ form.errors.username }}</label>
+            {% endif %}
+
+          
+            <label for="email">Email</label>
+            {{ form.email }}
+            {% if form.errors.email %}
+            <label class="text-danger">{{ form.errors.email }}</label>
+            {% endif %}
+
+           
+            <label for="password1">Password</label>
+            {{ form.password1 }}
+            {% if form.errors.password1 %}
+            <label class="text-danger">{{ form.errors.password1 }}</label>
+            {% endif %}
+
+      
+            <label for="password2">Confirm Password</label>
+            {{ form.password2 }}
+            {% if form.errors.password2 %}
+            <label class="text-danger">{{ form.errors.password2 }}</label>
+            {% endif %}
+
+          
+            <input type="submit" value="Register">
+        </form>
+
+        <div class="form-footer">
+            <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+
+    <div class="footer-wrapper">
+        {% include 'footer.html' %}
+    </div>
+
+</body>
+</html>
+
+{% endblock content %}

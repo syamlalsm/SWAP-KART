@@ -1,0 +1,174 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Brand Model</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 50%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 20px;
+            border: 1.5px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+            background-color: #f5f5f5;
+        }
+
+        .form-container textarea {
+            resize: vertical;
+            min-height: 1px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            background-color: #666;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #ff5100;
+        }
+
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            border-color: #ff5100;
+            outline: none;
+        }
+
+       
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0px;
+        }
+
+        .form-group .half-width {
+            width: 48%;
+        }
+
+        .form-group .full-width {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Swapping Model Details</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="id_model_name">Model Name:</label>
+                    {{ form.model_name }}
+                </div>
+                <div class="half-width">
+                    <label for="id_name">Brand Model Name:</label>
+                    {{ form.name }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="id_image">Image:</label>
+                    {{ form.image }}
+                </div>
+                <div class="half-width">
+                    <label for="id_year">Year:</label>
+                    {{ form.year }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="id_kilometer">Kilometer:</label>
+                    {{ form.kilometer }}
+                </div>
+                <div class="half-width">
+                    <label for="id_engine">Engine:</label>
+                    {{ form.engine }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="half-width">
+                    <label for="id_actual_price">Actual Price:</label>
+                    {{ form.actual_price }}
+                </div>
+                <div class="half-width">
+                    <label for="id_booking_price">Booking Price:</label>
+                    {{ form.booking_price }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="full-width">
+                    <label for="id_location">Location:</label>
+                    {{ form.location }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="full-width">
+                    <label for="id_description">Description:</label>
+                    {{ form.description }}
+                </div>
+            </div>
+
+        
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    {% include 'footer.html' %}
+
+</body>
+</html>
+{% endblock content %}
